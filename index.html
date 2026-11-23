@@ -8,17 +8,21 @@
 <title>디자인 요청서</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
-:root{--ink:#0e3b43;--muted:#76979b;--hair:#e0eeee;--soft:#f0f9f9;--frame:#024F5B;--accent:#A0E5E5;--deep:#1CB6BB;--bg:#e2f4f4;--sel:#e8f8f8}
+:root{--ink:#0e3b43;--muted:#4f7276;--accent-text:#0a7880;--hair:#e0eeee;--soft:#f0f9f9;--frame:#024F5B;--accent:#A0E5E5;--deep:#1CB6BB;--bg:#e2f4f4;--sel:#e8f8f8}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;font-size:15px;letter-spacing:-.02em}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;font-size:15px;letter-spacing:-.02em;word-break:keep-all;overflow-wrap:anywhere}
 button,input,select,textarea{font:inherit;color:inherit}
-.wrap{max-width:640px;margin:0 auto;padding:16px 14px 120px}
+.wrap{max-width:640px;margin:0 auto;padding:16px 14px 140px}
 .head{background:var(--frame);color:#fff;border-radius:22px;padding:22px 20px}
 .head h1{margin:0;font-size:22px;letter-spacing:-.03em}
 .head p{margin:6px 0 0;font-size:13px;color:#bfe9e9;line-height:1.6}
 .head .meta{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
 .head .meta span{background:rgba(255,255,255,.12);border-radius:999px;padding:4px 10px;font-size:12px}
 .ds{display:none;margin-top:14px;background:#fff;border-radius:16px;padding:12px 14px;color:var(--ink)}
+.lnote{margin-top:12px;background:#fff4d6;border:1px solid #f0d58a;color:var(--ink);border-radius:12px;padding:10px 12px;font-size:13px;line-height:1.6}
+.lnote[hidden]{display:none}
+.dnote{background:var(--sel);border-color:#b6dcdc;color:var(--ink);display:flex;align-items:center;flex-wrap:wrap;gap:0 8px}
+.dnote button{border:0;background:none;padding:0 4px;min-height:36px;color:var(--accent-text);font-weight:700;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .ds-r{display:flex;align-items:center;gap:10px}
 .ds-w{display:flex;align-items:center;gap:14px}
 .ds-img{width:84px;height:84px;flex:none;border-radius:14px;background:#fffdf5;display:grid;place-items:center;overflow:hidden}
@@ -38,8 +42,12 @@ button,input,select,textarea{font:inherit;color:inherit}
 .f:last-child{margin-bottom:0}
 label.l,.l{display:block;font-size:12.5px;color:var(--muted);margin-bottom:6px}
 .req{color:#e0607a;margin-left:2px}
+.head .req{color:#ffc2cf;margin:0 2px 0 0}
+.head p.reqlegend{margin:4px 0 0;font-size:12.5px;color:#dff5f5}
 input[type=text],input[type=tel],input[type=date],select,textarea{width:100%;border:1px solid transparent;border-radius:12px;padding:11px 12px;background:var(--soft);font-size:16px}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--deep);background:#fff}
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid #024F5B;outline-offset:1px}
+.drop input:focus-visible{outline:none}
 textarea{min-height:110px;resize:vertical;line-height:1.6}
 .two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
 .two>*{min-width:0}
@@ -48,7 +56,9 @@ input[type=date]{min-width:0;display:block;-webkit-appearance:none;appearance:no
 .seg button{border:0;background:var(--soft);border-radius:999px;padding:9px 14px;font-size:14px;color:#4d6c70}
 .seg button.on{background:var(--frame);color:#fff;font-weight:700}
 .hint{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.6}
-.addr{background:var(--sel);border-radius:12px;padding:10px 12px;font-size:13px;line-height:1.6;margin-top:8px}
+input::placeholder,textarea::placeholder{color:#6f9093;opacity:1}
+.addr{position:relative;background:none;padding:6px 0 0 22px;font-size:13px;line-height:1.6;margin-top:8px;color:var(--muted)}
+.addr::before{content:'i';position:absolute;left:0;top:9px;width:15px;height:15px;box-sizing:border-box;border:1.5px solid currentColor;border-radius:50%;font:700 10px/12px Georgia,"Times New Roman",serif;text-align:center}
 
 /* 항목별 옵션 */
 .opt{background:var(--soft);border-radius:16px;padding:12px 14px;margin-top:8px}
@@ -69,38 +79,52 @@ input[type=date]{min-width:0;display:block;-webkit-appearance:none;appearance:no
 .evc .tg{font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;background:#fff;color:#0b7e86;flex:none}
 .evc .tt{font-size:14px;font-weight:500}
 .evc .dd{font-size:12px;color:var(--muted)}
-.evc .ck{margin-left:auto;width:20px;height:20px;border-radius:50%;border:2px solid #b6dcdc;flex:none}
-.evc.on .ck{border-color:var(--deep);background:var(--deep);box-shadow:inset 0 0 0 3px #fff}
+.evc .ck{margin-left:auto;width:20px;height:20px;border-radius:50%;border:2px solid #5a8e92;flex:none}
+.evc.on .ck{border-color:var(--frame);background:var(--frame);box-shadow:inset 0 0 0 3px #fff}
 .evc.always{background:#fff;border:1.5px dashed #b6dcdc}
 .evc.always.on{border-style:solid;border-color:var(--deep);background:var(--sel)}
 
 /* 급한 정도 */
-.urg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-.urg button{border:1.5px solid transparent;background:var(--soft);border-radius:14px;padding:10px 6px;text-align:center}
-.urg button b{display:block;font-size:14px}
-.urg button small{display:block;font-size:11px;color:var(--muted);margin-top:2px}
-.urg button.on{background:var(--frame);color:#fff}
-.urg button.on small{color:#bfe9e9}
-.urg button:disabled{opacity:.35;cursor:not-allowed}
+.urg-view{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;font-size:14px;line-height:1.5}
+.urg-view b{font-size:13px;font-weight:700;border-radius:999px;padding:4px 12px;flex:none}
+.urg-view .lv-0{background:#dff3f3;color:var(--accent-text)}
+.urg-view .lv-1{background:#fdf0d8;color:#80500b}
+.urg-view .lv-2{background:#fde2e4;color:#b3261e}
+.urg-view .wait{color:var(--muted)}
+.urg-scale{font-size:12px;color:var(--muted);margin-top:4px}
 
-.drop{display:block;border:1.5px dashed #b6dcdc;border-radius:14px;padding:18px;text-align:center;color:var(--deep);font-weight:700;cursor:pointer}
-.drop input{display:none}
+.drop{position:relative;display:block;border:1.5px dashed #b6dcdc;border-radius:14px;padding:18px;text-align:center;color:var(--accent-text);font-weight:700;cursor:pointer}
+.drop input{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;clip:rect(0 0 0 0)}
+.drop:focus-within{outline:2px solid #024F5B;outline-offset:2px}
+.drop.full,.drop.busy{cursor:default;color:var(--muted)}
 .thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
 .thumbs div{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:1;background:var(--soft)}
 .thumbs img{width:100%;height:100%;object-fit:cover}
 .thumbs button{position:absolute;top:4px;right:4px;width:24px;height:24px;border-radius:50%;border:0;background:rgba(0,0,0,.55);color:#fff;font-size:14px;line-height:1}
-.bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--hair);padding:10px 14px calc(10px + env(safe-area-inset-bottom));display:flex;gap:8px;justify-content:center}
+.bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--hair);padding:10px 14px calc(10px + env(safe-area-inset-bottom));display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.bnote{flex-basis:100%;margin:-2px 0 0;text-align:center;font-size:11.5px;color:var(--muted);line-height:1.4}
 .bar button{flex:1;max-width:306px;border:0;border-radius:999px;padding:13px;font-weight:700;font-size:15px}
 .b1{background:var(--accent);color:var(--frame)}
 .b2{background:var(--frame);color:#fff}
-.err{color:#d0443a;font-size:12.5px;margin-top:10px;display:none}
-.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--frame);color:#fff;padding:10px 16px;border-radius:999px;font-size:13px;display:none;z-index:5}
+.err{color:#b3261e;font-weight:600;font-size:12.5px;margin-top:10px;display:none}
+.ferr{color:#b3261e;font-size:12.5px;margin-top:6px}
+.ferr[hidden]{display:none}
+.bad input,.bad select,.bad textarea,input.bad,select.bad,textarea.bad{border:2px solid #b3261e;padding:10px 11px}
+input[type=date].bad{padding:10px 9px}
+.seg.bad,.evs.bad{outline:2px solid #b3261e;outline-offset:4px;border-radius:12px}
+.toast{position:fixed;left:50%;bottom:108px;transform:translateX(-50%);width:max-content;max-width:calc(100% - 32px);background:var(--frame);color:#fff;padding:10px 16px;border-radius:18px;font-size:13px;line-height:1.5;text-align:center;display:none;z-index:5}
+.copybox{position:fixed;inset:0;background:rgba(2,40,46,.45);display:flex;align-items:flex-end;justify-content:center;padding:16px;z-index:6}
+.copybox[hidden]{display:none}
+.copybox .cb{width:100%;max-width:520px;background:#fff;border-radius:18px;padding:14px;margin-bottom:env(safe-area-inset-bottom)}
+.copybox p{margin:0 0 8px;font-size:13px;color:var(--ink);line-height:1.6}
+.copybox textarea{width:100%;height:42vh;min-height:160px;font-size:13px;line-height:1.5;resize:none}
+.copybox button{margin-top:10px;width:100%;border:0;border-radius:999px;padding:12px;font-weight:700;font-size:15px;background:var(--frame);color:#fff}
 
 #print{display:none}
 @media print{
   @page{size:A4;margin:14mm}
   body{background:#fff}
-  .wrap,.bar,.toast{display:none !important}
+  .wrap,.bar,.toast,.copybox{display:none !important}
   #print{display:block;font-size:11.5pt;color:#111}
   #print h1{font-size:18pt;margin:0 0 4pt;color:#024F5B}
   #print .pm{font-size:9.5pt;color:#555;margin-bottom:10pt}
@@ -118,72 +142,91 @@ input[type=date]{min-width:0;display:block;-webkit-appearance:none;appearance:no
 <div class="wrap">
   <div class="head">
     <h1>디자인 요청서</h1>
-    <p>필요한 디자인을 적어 보내주세요. 작성 후 아래 버튼으로 PDF를 저장하거나 내용을 복사해서 디자인 담당자에게 카톡으로 보내면 돼요.</p>
+    <p>필요한 디자인을 적고, 아래 버튼으로 내용을 복사하거나 PDF로 저장해 디자인 담당자에게 카톡으로 보내주세요.</p>
+    <p class="reqlegend"><span class="req" aria-hidden="true">*</span> 표시는 꼭 채워야 해요.</p>
     <div class="meta"><span id="reqNo"></span><span id="reqDate"></span></div>
     <div class="ds" id="ds"></div>
+    <div class="lnote" id="linkNote" role="status" hidden></div>
+    <div class="lnote dnote" id="draftNote" role="status" hidden><span>작성하던 내용을 불러왔어요. 사진은 다시 넣어주세요.</span> <button type="button" id="draftReset">새로 쓰기</button></div>
   </div>
 
   <section class="card">
     <h2><span class="n">1</span>요청자</h2>
     <div class="two">
-      <div class="f"><label class="l">이름<span class="req">*</span></label><input type="text" id="who" placeholder="홍길동"></div>
-      <div class="f"><label class="l">소속 · 직책</label><input type="text" id="role" placeholder="평촌점 매니저"></div>
+      <div class="f"><label class="l" for="who">이름<span class="req" aria-hidden="true">*</span></label><input type="text" id="who" placeholder="예) 홍길동" autocomplete="name" aria-required="true">
+        <div class="ferr" id="fe-who" hidden></div></div>
+      <div class="f"><label class="l" for="role">소속 · 직책</label><input type="text" id="role" placeholder="예) 평촌점 매니저" autocomplete="organization-title"></div>
     </div>
-    <div class="f"><label class="l">연락처</label><input type="tel" id="phone" placeholder="010-0000-0000" inputmode="tel"></div>
+    <div class="f"><label class="l" for="phone">연락처</label><input type="tel" id="phone" placeholder="예) 010-0000-0000" inputmode="tel" autocomplete="tel"></div>
   </section>
 
   <section class="card">
     <h2><span class="n">2</span>브랜드 · 지점</h2>
-    <div class="f"><span class="l">브랜드<span class="req">*</span></span><div class="seg" id="brandSeg"></div>
-      <input type="text" id="brandEtc" placeholder="브랜드 이름" style="margin-top:8px;display:none"></div>
-    <div class="f"><label class="l" for="branch">지점<span class="req">*</span></label><select id="branch"></select>
+    <div class="f"><span class="l" id="lb-brand">브랜드<span class="req" aria-hidden="true">*</span></span><div class="seg" id="brandSeg" role="radiogroup" aria-labelledby="lb-brand"></div>
+      <input type="text" id="brandEtc" placeholder="브랜드 이름" style="margin-top:8px;display:none">
+      <div class="ferr" id="fe-brand" hidden></div></div>
+    <div class="f"><label class="l" for="branch">지점<span class="req" aria-hidden="true">*</span></label><select id="branch" aria-required="true"></select>
       <input type="text" id="branchEtc" placeholder="지점 이름 (예: 신세계 대전점 팝업)" style="margin-top:8px;display:none">
+      <div class="ferr" id="fe-branch" hidden></div>
       <div class="addr" id="addr"></div></div>
   </section>
 
   <section class="card">
     <h2><span class="n">3</span>어떤 일정에 쓰나요</h2>
-    <div class="f"><span class="l">일정 선택<span class="req">*</span></span>
-      <div class="evs" id="evs"></div>
-      <input type="text" id="evEtc" placeholder="일정 이름 (예: 12월 신세계 대전 팝업)" style="margin-top:8px;display:none"></div>
+    <div class="f"><span class="l" id="lb-ev">일정 선택<span class="req" aria-hidden="true">*</span></span>
+      <div class="evs" id="evs" role="radiogroup" aria-labelledby="lb-ev"></div>
+      <input type="text" id="evEtc" placeholder="일정 이름 (예: 12월 신세계 대전 팝업)" style="margin-top:8px;display:none">
+      <div class="ferr" id="fe-ev" hidden></div></div>
     <div class="two" id="evDates">
       <div class="f"><label class="l" for="evStart">행사 · 사용 시작일</label><input type="date" id="evStart"></div>
-      <div class="f"><label class="l" for="evEnd">종료일</label><input type="date" id="evEnd"></div>
+      <div class="f"><label class="l" for="evEnd">종료일</label><input type="date" id="evEnd">
+        <div class="ferr" id="fe-evEnd" hidden></div></div>
     </div>
   </section>
 
   <section class="card">
     <h2><span class="n">4</span>무엇이 필요한가요</h2>
-    <div class="f"><span class="l">요청 항목 (여러 개 선택)<span class="req">*</span></span><div class="seg" id="itemSeg"></div>
-      <input type="text" id="itemEtc" placeholder="기타 항목" style="margin-top:8px;display:none"></div>
+    <div class="f"><span class="l" id="lb-items">요청 항목 (여러 개 선택)<span class="req" aria-hidden="true">*</span></span><div class="seg" id="itemSeg" role="group" aria-labelledby="lb-items"></div>
+      <input type="text" id="itemEtc" placeholder="기타 항목" style="margin-top:8px;display:none">
+      <div class="ferr" id="fe-items" hidden></div></div>
     <div id="opts"></div>
   </section>
 
   <section class="card">
     <h2><span class="n">5</span>언제까지 필요한가요</h2>
-    <div class="f"><label class="l" for="due">받아야 하는 날<span class="req">*</span></label><input type="date" id="due">
+    <div class="f"><label class="l" for="due">받아야 하는 날<span class="req" aria-hidden="true">*</span></label><input type="date" id="due" aria-required="true">
+      <div class="ferr" id="fe-due" hidden></div>
       <div class="hint" id="dueHint">박스 · 컵 같은 인쇄물은 제작에 2~3주 이상 걸려요. 여유 있게 적어주세요.</div></div>
-    <div class="f"><span class="l">급한 정도 <span style="font-size:11px">· 받아야 하는 날 기준으로 자동 선택돼요</span></span><div class="urg" id="urg"></div></div>
+    <div class="f"><span class="l" id="lb-urg">급한 정도 <span style="font-size:11px">· 받는 날에 맞춰 자동으로 정해져요</span></span>
+      <div class="urg-view" id="urg" aria-live="polite"></div>
+      <div class="urg-scale">보통 15일 이후 · 급함 8~14일 이내 · 매우 급함 7일 이내</div></div>
   </section>
 
   <section class="card">
     <h2><span class="n">6</span>상세 내용</h2>
-    <div class="f"><label class="l" for="detail">들어갈 문구 · 메뉴명 · 가격 · 원하는 느낌<span class="req">*</span></label>
-      <textarea id="detail" placeholder="예) 겨울 시즌 핫초콜릿 출시 POP, 가격 5,500원&#10;메인 문구: '따뜻한 겨울 한 잔'&#10;브랜드 컬러 유지, 눈 내리는 느낌"></textarea></div>
+    <div class="f"><label class="l" for="detail">들어갈 문구 · 메뉴명 · 가격 · 원하는 느낌<span class="req" aria-hidden="true">*</span></label>
+      <textarea id="detail" aria-required="true" placeholder="예) 겨울 시즌 핫초콜릿 출시 POP, 가격 5,500원&#10;메인 문구: '따뜻한 겨울 한 잔'&#10;브랜드 컬러 유지, 눈 내리는 느낌"></textarea>
+      <div class="ferr" id="fe-detail" hidden></div></div>
     <div class="f"><span class="l">레퍼런스 이미지 · 현장 사진 (최대 6장)</span>
-      <label class="drop">＋ 사진 추가<input type="file" id="imgs" accept="image/*" multiple></label>
+      <label class="drop" id="drop"><span id="dropTxt">＋ 사진 추가</span><input type="file" id="imgs" accept="image/*" multiple></label>
       <div class="thumbs" id="thumbs"></div>
       <div class="hint">매대 · 벽면 등 부착할 곳 사진이 있으면 정확한 작업에 도움돼요.</div></div>
-    <div class="f"><label class="l" for="memo">기타 메모</label><input type="text" id="memo" placeholder="검품 시간, 설치 담당자 등"></div>
+    <div class="f"><label class="l" for="memo">기타 메모</label><input type="text" id="memo" placeholder="예) 검품 시간, 설치 담당자"></div>
   </section>
-  <div class="err" id="err"></div>
+  <div class="err" id="err" role="alert"></div>
 </div>
 
 <div class="bar">
-  <button class="b1" id="copyBtn">카톡용 텍스트 복사</button>
-  <button class="b2" id="pdfBtn">PDF로 저장</button>
+  <button class="b2" id="copyBtn">카톡용 텍스트 복사</button>
+  <button class="b1" id="pdfBtn">PDF로 저장</button>
+  <p class="bnote">저장이 안 되면 Safari나 Chrome에서 열어주세요</p>
 </div>
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="copybox" id="copyBox" role="dialog" aria-modal="true" aria-labelledby="copyBoxMsg" hidden>
+  <div class="cb"><p id="copyBoxMsg">자동 복사가 안 됐어요. 아래 글을 길게 눌러 복사해주세요.</p>
+  <textarea id="copyBoxText" readonly aria-label="요청서 전문"></textarea>
+  <button type="button" id="copyBoxClose">닫기</button></div>
+</div>
 <div id="print"></div>
 
 <script>
@@ -196,9 +239,11 @@ const now = new Date(), TODAY = ymd(now);
 
 /* 지점 · 일정 · 디자이너 상태
    1) 스케줄러 앱의 「요청서 링크 만들기」로 만든 링크(#d=...)에 담겨 와요 — 웹페이지 자체엔 연락처가 없어요
-   2) 노트북 앱 안에서 열면 앱 데이터를 바로 읽어요 */
+   2) 노트북 앱 안에서 열면 앱 데이터를 바로 읽어요
+   작성 중 초안(이름·연락처 포함, 사진 제외)은 직원 본인 휴대폰 브라우저의 localStorage['dr-draft']에만 남고, 복사나 PDF 저장 뒤 지워져요 */
 const CATNAME = {popup:'팝업', store:'입점', menu:'신메뉴'};
 let BRANCHES = {}, EVENTS = [], STAT = null, BASE = '';
+let LINK_STATE = 'ok'; // 'ok' | 'none'(링크 데이터 없음) | 'bad'(링크가 깨짐)
 async function readLink(){
   const m = location.hash.match(/[#&]d=([zj])([A-Za-z0-9_-]+)/); if(!m) return null;
   const bin = atob(m[2].replace(/-/g,'+').replace(/_/g,'/')), u8 = Uint8Array.from(bin, c => c.charCodeAt(0));
@@ -208,8 +253,10 @@ async function readLink(){
   return JSON.parse(txt);
 }
 async function loadData(){
-  let L = null; try{ L = await readLink(); }catch(e){ console.warn(e); }
+  let L = null, linkErr = false; try{ L = await readLink(); }catch(e){ console.warn(e); linkErr = true; }
+  if(!L && (linkErr || /[#&]d=/.test(location.hash))) LINK_STATE = 'bad';
   if(L){
+    LINK_STATE = 'ok';
     BRANCHES = L.b || {}; BASE = L.t || '';
     EVENTS = (L.e||[]).map(([id,cat,brand,bn,title,start,end]) => ({id,cat,brand,bn,title,start,end}));
     if(L.s) STAT = {st:L.s[0], msg:L.s[1]};
@@ -221,7 +268,8 @@ async function loadData(){
     const bmap = Object.fromEntries((APP.branches||[]).map(b=>[b.id,b.name]));
     EVENTS = (APP.events||[]).filter(e => !e.done && CATNAME[e.cat] && e.end>=TODAY).map(e => ({...e, bn: bmap[e.branchId]||''}));
     BASE = TODAY;
-  }
+    LINK_STATE = 'ok';
+  } else if(LINK_STATE !== 'bad') LINK_STATE = 'none';
   try{ STAT = JSON.parse(localStorage.getItem('scheduler-status')); }catch(e){}
 }
 function eventsFor(brand, branchName){
@@ -243,13 +291,26 @@ const S = {brand:'츄로츄로', ev:null, items:new Set(), opt:{}, urg:'', imgs:
   no:`DR-${TODAY.replace(/-/g,'')}-${pad(now.getHours())}${pad(now.getMinutes())}`};
 $('reqNo').textContent = S.no; $('reqDate').textContent = '작성일 ' + TODAY;
 
-function seg(el, list, isOn, onPick){
-  el.innerHTML = list.map(v => `<button type="button" class="${isOn(v)?'on':''}" data-v="${esc(v)}">${esc(v)}</button>`).join('');
-  el.querySelectorAll('button').forEach(b => b.onclick = () => { onPick(b.dataset.v); seg(el, list, isOn, onPick); });
+/* 움직임 줄이기 설정이면 스크롤을 바로 옮긴다 */
+const smoothOk = () => !(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+/* 다시 그린 뒤에도 키보드 포커스를 같은 버튼에 돌려준다 */
+function drRefocus(root, attr, val){
+  const b = [...root.querySelectorAll('button')].find(x => x.getAttribute(attr) === val);
+  if(b) b.focus({preventScroll:true});
+}
+function seg(el, list, isOn, onPick, multi){
+  const st = on => multi ? `aria-pressed="${on}"` : `role="radio" aria-checked="${on}"`;
+  el.innerHTML = list.map(v => `<button type="button" class="${isOn(v)?'on':''}" ${st(isOn(v))} data-v="${esc(v)}">${esc(v)}</button>`).join('');
+  el.querySelectorAll('button').forEach(b => b.onclick = () => {
+    const had = el.contains(document.activeElement), v = b.dataset.v;
+    onPick(v); seg(el, list, isOn, onPick, multi);
+    if(had) drRefocus(el, 'data-v', v);
+  });
 }
 
 /* 브랜드 · 지점 */
-function drawBrand(){ seg($('brandSeg'), [...new Set(['츄로츄로','모락모락 다과점',...Object.keys(BRANCHES)]),'기타'], v => v===S.brand, v => { S.brand=v; S.ev=null; drawBranch(); }); }
+function drBrandList(){ return [...new Set(['츄로츄로','모락모락 다과점',...Object.keys(BRANCHES)]),'기타']; }
+function drawBrand(){ seg($('brandSeg'), drBrandList(), v => v===S.brand, v => { S.brand=v; S.ev=null; drawBranch(); }); }
 function drawBranch(){
   $('brandEtc').style.display = S.brand==='기타' ? 'block' : 'none';
   const list = BRANCHES[S.brand] || [];
@@ -260,15 +321,18 @@ function curBranch(){ return (BRANCHES[S.brand]||[])[$('branch').value]; }
 function onBranch(){
   const b = curBranch();
   $('branchEtc').style.display = b ? 'none' : 'block';
-  $('addr').innerHTML = b ? `📦 배송지: ${esc(b[1]||'-')}${b[2]||b[3]?`<br>받는 분: ${esc(b[2])} ${esc(b[3])}`:''}` : '새 지점은 배송 주소를 상세 내용이나 메모에 적어주세요.';
+  $('addr').innerHTML = b ? `배송지: ${esc(b[1]||'-')}${b[2]||b[3]?`<br>받는 분: ${esc(b[2])} ${esc(b[3])}`:''}` : '새 지점은 배송 주소를 상세 내용이나 메모에 적어주세요.';
   drawEvents();
 }
 $('branch').onchange = onBranch;
+/* 종료일은 시작일보다 앞을 고를 수 없게 */
+function drEvMin(){ $('evEnd').min = $('evStart').value || ''; }
+$('evStart').addEventListener('input', drEvMin); $('evStart').addEventListener('change', drEvMin);
 
 /* 일정 선택 */
 function drawEvents(){
   const b = curBranch(), list = eventsFor(S.brand, b ? b[0] : '');
-  const card = (key, tag, title, sub, cls='') => `<button type="button" class="evc ${cls} ${S.ev===key?'on':''}" data-ev="${esc(key)}">
+  const card = (key, tag, title, sub, cls='') => `<button type="button" class="evc ${cls} ${S.ev===key?'on':''}" role="radio" aria-checked="${S.ev===key}" data-ev="${esc(key)}">
     <span class="tg">${tag}</span><span><div class="tt">${esc(title)}</div><div class="dd">${sub}</div></span><span class="ck"></span></button>`;
   let h = list.map(e => card(String(e.id), CATNAME[e.cat]||'일정', e.title, `${e.bn?esc(e.bn)+' · ':''}${md(e.start)}${e.end!==e.start?' ~ '+md(e.end):''}`)).join('');
   if(!list.length) h += `<div class="hint" style="margin:0 0 4px">달력에 등록된 ${esc(S.brand)} 일정이 없어요. 아래에서 골라주세요.</div>`;
@@ -276,35 +340,43 @@ function drawEvents(){
   h += card('etc','기타','목록에 없는 일정','새 행사 · 아직 등록 안 된 일정','always');
   $('evs').innerHTML = h;
   $('evs').querySelectorAll('[data-ev]').forEach(x => x.onclick = () => {
+    const had = $('evs').contains(document.activeElement);
     S.ev = x.dataset.ev;
     const e = list.find(e => String(e.id)===S.ev);
     if(e){ $('evStart').value=e.start; $('evEnd').value=e.end; }
+    drEvMin();
     drawEvents();
+    if(had) drRefocus($('evs'), 'data-ev', S.ev);
   });
   $('evEtc').style.display = S.ev==='etc' ? 'block' : 'none';
   $('evDates').style.display = S.ev==='always' ? 'none' : 'grid';
 }
 
 /* 요청 항목 + 항목별 옵션 */
-seg($('itemSeg'), ITEMS, v => S.items.has(v), v => {
-  if(S.items.has(v)) S.items.delete(v); else { S.items.add(v); S.opt[v] = S.opt[v] || {size:'A4', qty:1, kind:'원형', desc:''}; }
-  $('itemEtc').style.display = S.items.has('기타') ? 'block' : 'none';
-  drawOpts();
-});
+function drawItems(){
+  seg($('itemSeg'), ITEMS, v => S.items.has(v), v => {
+    if(S.items.has(v)) S.items.delete(v); else { S.items.add(v); S.opt[v] = S.opt[v] || {size:'A4', qty:1, kind:'원형', desc:''}; }
+    $('itemEtc').style.display = S.items.has('기타') ? 'block' : 'none';
+    drawOpts();
+  }, true);
+}
+drawItems();
 function drawOpts(){
   const list = [...S.items].filter(v => SIZE_ITEMS.includes(v) || v==='스티커');
   $('opts').innerHTML = list.map(v => { const o=S.opt[v];
     const stp = `<span class="stp"><button type="button" data-q="${esc(v)}" data-d="-1" aria-label="수량 줄이기">−</button><span>${o.qty}${v==='스티커'?'종':'장'}</span><button type="button" data-q="${esc(v)}" data-d="1" aria-label="수량 늘리기">+</button></span>`;
     if(v==='스티커') return `<div class="opt"><div class="opt-h"><b>스티커 종류</b>${stp}</div>
-      <div class="seg" data-kind="${esc(v)}">${Object.keys(STICKERS).map(k=>`<button type="button" class="${k===o.kind?'on':''}" data-v="${k}">${k}</button>`).join('')}</div>
+      <div class="seg" data-kind="${esc(v)}" role="radiogroup" aria-label="스티커 종류">${Object.keys(STICKERS).map(k=>`<button type="button" class="${k===o.kind?'on':''}" role="radio" aria-checked="${k===o.kind}" data-v="${esc(k)}">${esc(k)}</button>`).join('')}</div>
       ${o.kind==='기타' ? `<textarea data-desc="${esc(v)}" placeholder="기존에 없던 스티커라면 어떤 모양 · 용도인지 짧게 적어주세요">${esc(o.desc)}</textarea>` : `<div class="tip">${STICKERS[o.kind]}</div>`}</div>`;
     return `<div class="opt"><div class="opt-h"><b>${esc(v)} 사이즈</b>${stp}</div>
-      <div class="seg" data-size="${esc(v)}">${SIZES.map(s=>`<button type="button" class="${s===o.size?'on':''}" data-v="${s}">${s}</button>`).join('')}</div>
+      <div class="seg" data-size="${esc(v)}" role="radiogroup" aria-label="${esc(v)} 사이즈">${SIZES.map(s=>`<button type="button" class="${s===o.size?'on':''}" role="radio" aria-checked="${s===o.size}" data-v="${esc(s)}">${esc(s)}</button>`).join('')}</div>
       ${v==='POP · 가격표' ? '<div class="tip">POP꽂이에 꽂을 거라면 A3를 골라주세요.</div>' : ''}</div>`;
   }).join('');
   $('opts').querySelectorAll('[data-q]').forEach(b => b.onclick = () => { const o=S.opt[b.dataset.q]; o.qty=Math.max(1,o.qty+Number(b.dataset.d)); drawOpts(); });
-  $('opts').querySelectorAll('[data-size] button').forEach(b => b.onclick = () => { S.opt[b.parentNode.dataset.size].size=b.dataset.v; drawOpts(); });
-  $('opts').querySelectorAll('[data-kind] button').forEach(b => b.onclick = () => { S.opt[b.parentNode.dataset.kind].kind=b.dataset.v; drawOpts(); });
+  const reopt = (b, attr) => { const key = b.parentNode.getAttribute(attr), v = b.dataset.v; drawOpts();
+    const box = [...$('opts').querySelectorAll('['+attr+']')].find(x => x.getAttribute(attr) === key); if(box) drRefocus(box, 'data-v', v); };
+  $('opts').querySelectorAll('[data-size] button').forEach(b => b.onclick = () => { S.opt[b.parentNode.dataset.size].size=b.dataset.v; reopt(b, 'data-size'); });
+  $('opts').querySelectorAll('[data-kind] button').forEach(b => b.onclick = () => { S.opt[b.parentNode.dataset.kind].kind=b.dataset.v; reopt(b, 'data-kind'); });
   $('opts').querySelectorAll('[data-desc]').forEach(t => t.oninput = () => S.opt[t.dataset.desc].desc=t.value);
 }
 
@@ -313,21 +385,63 @@ function drawUrg(){
   const d=$('due').value, left = d ? Math.round((new Date(d)-new Date(TODAY))/864e5) : null;
   const auto = left==null ? '' : left>=15 ? '보통' : left>=8 ? '급함' : '매우 급함';
   S.urg = auto;
-  $('urg').innerHTML = URG.map(([k,c]) => `<button type="button" class="${k===auto?'on':''}" ${left!=null&&k!==auto?'disabled':''}><b>${k}</b><small>${c}</small></button>`).join('');
+  const lv = URG.findIndex(([k]) => k===auto);
+  $('urg').innerHTML = left==null ? '<span class="wait">받는 날을 고르면 정해져요</span>'
+    : `<span>${left<0 ? '받는 날이 이미 지났어요' : left===0 ? '받는 날이 오늘이에요' : `받는 날까지 ${left}일`} →</span><b class="lv-${lv}">${esc(auto)}</b>`;
   $('dueHint').textContent = left==null ? '박스 · 컵 같은 인쇄물은 제작에 2~3주 이상 걸려요. 여유 있게 적어주세요.'
     : left<0 ? '⚠️ 지난 날짜예요.' : `${left}일 뒤 · 박스 · 컵류는 제작에 2~3주 이상 걸려요.`;
 }
 $('due').oninput = drawUrg;
+$('due').min = TODAY;
 
 /* 사진 */
-function shrink(file){ return new Promise(res => { const r=new FileReader(); r.onload=()=>{ const im=new Image(); im.onload=()=>{
-  const s=Math.min(1,1400/Math.max(im.width,im.height)), c=document.createElement('canvas'); c.width=im.width*s; c.height=im.height*s;
-  c.getContext('2d').drawImage(im,0,0,c.width,c.height); res(c.toDataURL('image/jpeg',.85)); }; im.src=r.result; }; r.readAsDataURL(file); }); }
-$('imgs').onchange = async () => { for(const f of [...$('imgs').files].slice(0, 6-S.imgs.length)) S.imgs.push(await shrink(f)); $('imgs').value=''; drawThumbs(); };
-function drawThumbs(){
-  $('thumbs').innerHTML = S.imgs.map((u,i)=>`<div><img src="${u}" alt="레퍼런스 ${i+1}"><button type="button" data-rm="${i}" aria-label="사진 삭제">×</button></div>`).join('');
-  $('thumbs').querySelectorAll('[data-rm]').forEach(b => b.onclick = () => { S.imgs.splice(+b.dataset.rm,1); drawThumbs(); });
+/* 열 수 없는 사진은 null로 끝내서 건너뛴다 */
+function shrink(file){ return new Promise(res => { const r=new FileReader();
+  r.onerror = () => res(null);
+  r.onload=()=>{ const im=new Image();
+    im.onerror = () => res(null);
+    im.onload=()=>{ try{
+      const s=Math.min(1,1400/Math.max(im.width,im.height)), c=document.createElement('canvas'); c.width=Math.round(im.width*s); c.height=Math.round(im.height*s);
+      c.getContext('2d').drawImage(im,0,0,c.width,c.height); res(c.toDataURL('image/jpeg',.85)); }catch(e){ res(null); } };
+    im.src=r.result; };
+  try{ r.readAsDataURL(file); }catch(e){ res(null); } }); }
+const DR_MAX_IMGS = 6;
+let drImgBusy = false;
+function drDropLabel(msg){
+  const full = S.imgs.length >= DR_MAX_IMGS;
+  $('dropTxt').textContent = msg || (full ? '사진은 6장까지예요' : '＋ 사진 추가' + (S.imgs.length ? ` · 지금 ${S.imgs.length}/6장` : ''));
+  $('drop').classList.toggle('busy', drImgBusy);
+  $('drop').classList.toggle('full', !drImgBusy && full);
+  $('imgs').disabled = drImgBusy || full;
 }
+$('imgs').onchange = async () => {
+  const files = [...$('imgs').files]; $('imgs').value='';
+  if(!files.length) return;
+  const room = Math.max(0, DR_MAX_IMGS - S.imgs.length), take = files.slice(0, room), over = files.length - take.length;
+  let broken = 0;
+  drImgBusy = true;
+  for(let i=0; i<take.length; i++){
+    drDropLabel(`사진 줄이는 중… (${i+1}/${take.length})`);
+    const u = await shrink(take[i]);
+    if(u) S.imgs.push(u); else broken++;
+  }
+  drImgBusy = false;
+  drawThumbs();
+  const notes = [broken ? `${broken}장은 열 수 없어서 뺐어요` : '', over ? `${over}장은 6장을 넘어 뺐어요` : ''].filter(Boolean);
+  if(notes.length) toast(notes.join(' · '));
+};
+function drawThumbs(){
+  $('thumbs').innerHTML = S.imgs.map((u,i)=>`<div><img src="${u}" alt="레퍼런스 ${i+1}"><button type="button" data-rm="${i}" aria-label="사진 ${i+1} 삭제">×</button></div>`).join('');
+  $('thumbs').querySelectorAll('[data-rm]').forEach(b => b.onclick = () => {
+    const i = +b.dataset.rm; S.imgs.splice(i,1); drawThumbs();
+    const next = $('thumbs').querySelectorAll('[data-rm]'); // 지운 자리 근처로 포커스를 옮긴다
+    (next[Math.min(i, next.length-1)] || $('imgs')).focus({preventScroll:true});
+  });
+  drDropLabel();
+  drBtnRank();
+}
+/* 사진이 있으면 PDF가 주 버튼, 없으면 복사가 주 버튼 */
+function drBtnRank(){ const hasImg=S.imgs.length>0; $('copyBtn').className=hasImg?'b1':'b2'; $('pdfBtn').className=hasImg?'b2':'b1'; }
 
 /* 내용 모으기 (스케줄러에 바로 옮길 수 있는 고정 형식) */
 function collect(){
@@ -349,15 +463,89 @@ function collect(){
     items, due:$('due').value, urg:S.urg, detail:$('detail').value.trim(), memo:$('memo').value.trim(), imgs:S.imgs
   };
 }
-function validate(d){
+let drTried = false;
+function validate(d, quiet){
+  const firstBtn = id => $(id).querySelector('button') || $(id);
+  const checks = [
+    ['who', '이름', 'who', () => $('who'), '이름을 적어주세요', !d.who],
+    ['brand', '브랜드', 'brandEtc', () => $('brandEtc'), '브랜드 이름을 적어주세요', !d.brand],
+    ['branch', '지점', 'branchEtc', () => $('branchEtc'), '지점 이름을 적어주세요', !d.branch],
+    ['ev', '일정', 'evs', () => firstBtn('evs'), '어떤 일정에 쓰는지 골라주세요', !d.ev],
+    ['items', '요청 항목', 'itemSeg', () => firstBtn('itemSeg'), '필요한 항목을 하나 이상 골라주세요', !d.items.length],
+    ['evEnd', '종료일', 'evEnd', () => $('evEnd'), '종료일이 시작일보다 빨라요', S.ev!=='always' && !!d.evStart && !!d.evEnd && d.evEnd<d.evStart],
+    ['due', '받아야 하는 날', 'due', () => $('due'), !d.due ? '받아야 하는 날을 골라주세요' : '받아야 하는 날이 이미 지났어요', !d.due || d.due<TODAY],
+    ['detail', '상세 내용', 'detail', () => $('detail'), '들어갈 문구나 원하는 느낌을 적어주세요', !d.detail]
+  ];
   const miss = [];
-  if(!d.who) miss.push('이름'); if(!d.brand) miss.push('브랜드'); if(!d.branch) miss.push('지점');
-  if(!d.ev) miss.push('일정'); if(!d.items.length) miss.push('요청 항목'); if(!d.due) miss.push('받아야 하는 날'); if(!d.detail) miss.push('상세 내용');
+  checks.forEach(([key, name, elId, focusEl, msg, bad]) => {
+    const el = $(elId), fe = $('fe-' + key);
+    el.classList.toggle('bad', bad);
+    if(bad) el.setAttribute('aria-invalid', 'true'); else el.removeAttribute('aria-invalid');
+    if(el.matches('input,select,textarea')) el.setAttribute('aria-describedby', 'fe-' + key);
+    fe.hidden = !bad; fe.textContent = bad ? msg : '';
+    if(bad) miss.push([name, focusEl, key==='evEnd' || (key==='due' && !!d.due)]);
+  });
   $('err').style.display = miss.length ? 'block' : 'none';
-  $('err').textContent = miss.length ? '필수 항목을 채워주세요: ' + miss.join(', ') : '';
-  if(miss.length) $('err').scrollIntoView({behavior:'smooth',block:'center'});
+  $('err').textContent = miss.length ? (miss.every(m => m[2]) ? '다시 볼 칸이 있어요: ' : '빠진 칸이 있어요: ') + miss.map(m => m[0]).join(', ') : '';
+  if(miss.length && !quiet){
+    const t = miss[0][1]();
+    t.scrollIntoView({behavior: smoothOk() ? 'smooth' : 'auto', block:'center'});
+    t.focus({preventScroll:true});
+  }
   return !miss.length;
 }
+['input','change','click'].forEach(type => document.addEventListener(type, ev => {
+  if(drTried) setTimeout(() => validate(collect(), true), 0);
+  const t = ev.target;
+  if(type==='click' && t && t.closest && t.closest('#copyBtn,#pdfBtn,#draftReset')) return; // 보낸 뒤 지운 초안을 다시 저장하지 않게
+  setTimeout(() => { clearTimeout(drDraftT); drDraftT = setTimeout(drDraftSave, 300); }, 0);
+}));
+
+/* 작성 중 초안: 새로고침 · 카톡 전환 뒤에도 이어 쓰게 (사진은 저장 안 함) */
+const DR_DRAFT_KEY = 'dr-draft';
+let drDraftT = 0, drDraftReady = false;
+function drDraftClear(){ clearTimeout(drDraftT); try{ localStorage.removeItem(DR_DRAFT_KEY); }catch(e){} }
+function drDraftSave(){
+  if(!drDraftReady) return;
+  const v = id => $(id).value, cb = curBranch();
+  const d = {v:1, at:Date.now(), who:v('who'), role:v('role'), phone:v('phone'), brand:S.brand, brandEtc:v('brandEtc'),
+    branchName: cb ? cb[0] : '', branchEtc:v('branchEtc'), ev:S.ev, evEtc:v('evEtc'), evStart:v('evStart'), evEnd:v('evEnd'),
+    items:[...S.items], opt:S.opt, itemEtc:v('itemEtc'), due:v('due'), detail:v('detail'), memo:v('memo')};
+  const texts = ['who','role','phone','brandEtc','branchEtc','evEtc','evStart','evEnd','itemEtc','due','detail','memo'];
+  if(texts.every(k => !String(d[k]||'').trim()) && !d.items.length && d.ev==null){ drDraftClear(); return; }
+  try{ localStorage.setItem(DR_DRAFT_KEY, JSON.stringify(d)); }catch(e){}
+}
+function drDraftLoad(){
+  let d = null; try{ d = JSON.parse(localStorage.getItem(DR_DRAFT_KEY)); }catch(e){}
+  if(!d || typeof d!=='object') return false;
+  if(d.v!==1 || !(Date.now() - (+d.at||0) < 7*864e5)){ drDraftClear(); return false; }
+  const str = x => typeof x==='string' ? x : '';
+  if(typeof d.brand==='string' && drBrandList().includes(d.brand)){ S.brand = d.brand; drawBrand(); drawBranch(); }
+  $('brandEtc').value = str(d.brandEtc);
+  const bl = BRANCHES[S.brand] || [], bn = str(d.branchName), bi = bn ? bl.findIndex(b => b[0]===bn) : -1;
+  $('branch').value = bi>=0 ? String(bi) : 'etc';
+  $('branchEtc').value = bi>=0 ? str(d.branchEtc) : (bn || str(d.branchEtc));
+  onBranch();
+  const cb = curBranch(), evl = eventsFor(S.brand, cb ? cb[0] : '');
+  if(d.ev==='always' || d.ev==='etc' || (d.ev!=null && evl.some(e => String(e.id)===String(d.ev)))) S.ev = String(d.ev);
+  $('evStart').value = str(d.evStart); $('evEnd').value = str(d.evEnd); $('evEtc').value = str(d.evEtc);
+  drEvMin();
+  drawEvents();
+  (Array.isArray(d.items) ? d.items : []).forEach(it => {
+    if(!ITEMS.includes(it)) return;
+    const o = d.opt && typeof d.opt[it]==='object' && d.opt[it] ? d.opt[it] : {};
+    S.items.add(it);
+    S.opt[it] = {size: SIZES.includes(o.size) ? o.size : 'A4', qty: Math.max(1, parseInt(o.qty,10) || 1),
+      kind: Object.prototype.hasOwnProperty.call(STICKERS, o.kind) ? o.kind : '원형', desc: str(o.desc)};
+  });
+  $('itemEtc').value = str(d.itemEtc);
+  $('itemEtc').style.display = S.items.has('기타') ? 'block' : 'none';
+  drawItems(); drawOpts();
+  ['who','role','phone','due','detail','memo'].forEach(k => { $(k).value = str(d[k]); });
+  drawUrg();
+  return true;
+}
+$('draftReset').onclick = () => { drDraftClear(); location.reload(); };
 function toText(d){
   return [
     '[디자인 요청서]',
@@ -366,21 +554,34 @@ function toText(d){
     `브랜드: ${d.brand}`, `지점: ${d.branch}`, d.ship?`배송지: ${d.ship}`:null,
     `일정: ${d.ev}`, d.evStart?`행사 기간: ${d.evStart} ~ ${d.evEnd||d.evStart}`:null,
     `요청 항목:\n` + d.items.map(i=>`- ${i}`).join('\n'),
-    `납품 희망일: ${d.due}`, `급한 정도: ${d.urg}`,
+    `받아야 하는 날: ${d.due}`, `급한 정도: ${d.urg}`,
     `상세 내용:\n${d.detail}`, d.memo?`메모: ${d.memo}`:null,
     `레퍼런스 이미지: ${d.imgs.length}장${d.imgs.length?' (PDF에 첨부)':''}`
   ].filter(Boolean).join('\n');
 }
-function toast(m){ const t=$('toast'); t.textContent=m; t.style.display='block'; clearTimeout(t._h); t._h=setTimeout(()=>t.style.display='none',2200); }
+function toast(m){ const t=$('toast'); t.textContent=m; t.style.display='block'; clearTimeout(t._h); t._h=setTimeout(()=>t.style.display='none',4000); }
 
 $('copyBtn').onclick = async () => {
-  const d=collect(); if(!validate(d)) return;
+  const d=collect(); if(!validate(d)){ drTried=true; return; }
   const txt=toText(d);
-  try{ await navigator.clipboard.writeText(txt); toast('복사됐어요. 카톡에 붙여넣어 보내주세요'); }
-  catch(e){ const ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); toast('복사됐어요'); }
+  const done = () => { toast(d.imgs.length ? `복사됐어요. 사진은 PDF로 저장해 요청번호 ${d.no}도 함께 보내주세요` : `복사됐어요. 카톡에 붙여넣고 요청번호 ${d.no}도 함께 알려주세요`); drDraftClear(); };
+  try{ await navigator.clipboard.writeText(txt); done(); }
+  catch(e){
+    let ok=false; const ta=document.createElement('textarea'); ta.value=txt; ta.setAttribute('readonly',''); ta.style.cssText='position:fixed;top:0;left:0;opacity:0';
+    document.body.appendChild(ta); ta.select();
+    try{ ok=document.execCommand('copy'); }catch(e2){ ok=false; }
+    ta.remove();
+    if(ok) done(); else drCopyBox(txt); // 실패하면 초안은 남겨 둔다
+  }
 };
+function drCopyBox(txt){
+  const box=$('copyBox'), ta=$('copyBoxText'); ta.value=txt; box.hidden=false;
+  ta.focus(); ta.select(); try{ ta.setSelectionRange(0, txt.length); }catch(e){}
+}
+$('copyBoxClose').onclick = () => { $('copyBox').hidden=true; $('copyBtn').focus(); };
+$('copyBox').addEventListener('keydown', e => { if(e.key==='Escape') $('copyBoxClose').click(); });
 $('pdfBtn').onclick = () => {
-  const d=collect(); if(!validate(d)) return;
+  const d=collect(); if(!validate(d)){ drTried=true; return; }
   const row = (k,v) => v ? `<tr><th>${k}</th><td>${v}</td></tr>` : '';
   $('print').innerHTML = `<h1>디자인 요청서</h1><div class="pm">${d.no} · 작성일 ${d.date}</div>
     <table>
@@ -390,7 +591,7 @@ $('pdfBtn').onclick = () => {
       ${row('일정', esc(d.ev))}
       ${row('행사 기간', d.evStart ? esc(`${d.evStart} ~ ${d.evEnd||d.evStart}`) : '')}
       ${row('요청 항목', d.items.map(esc).join('<br>'))}
-      ${row('납품 희망일', esc(d.due))}
+      ${row('받아야 하는 날', esc(d.due))}
       ${row('급한 정도', esc(d.urg))}
       ${row('상세 내용', `<pre>${esc(d.detail)}</pre>`)}
       ${row('메모', esc(d.memo))}
@@ -398,7 +599,7 @@ $('pdfBtn').onclick = () => {
     ${d.imgs.length?`<div class="imgs">${d.imgs.map(u=>`<img src="${u}" alt="">`).join('')}</div>`:''}
     <div class="raw"><pre>${esc(toText(d))}</pre></div>`;
   const prevTitle=document.title; document.title=`디자인요청서_${d.brand}_${d.branch}_${d.date}`;
-  setTimeout(()=>{ window.print(); document.title=prevTitle; }, 300);
+  setTimeout(()=>{ window.print(); document.title=prevTitle; drDraftClear(); toast(`PDF를 보낼 때 요청번호 ${d.no}도 함께 알려주세요`); }, 300);
 };
 
 /* 디자이너 상태 (스케줄러 앱이 계산해 둔 값) */
@@ -415,7 +616,15 @@ function drawStat(){
 
 loadData().then(() => {
   if(BASE && BASE!==TODAY) $('reqDate').textContent += ` · 일정은 ${md(BASE)} 기준`;
+  const drLinkMsg = {
+    none: '지점 목록이 담긴 링크가 아니에요. 디자이너에게 받은 링크로 다시 열거나, 아래에 지점 이름을 직접 적어주세요.',
+    bad: '링크가 중간에 잘려서 지점 목록을 못 읽었어요. 카톡에서 링크 전체를 다시 눌러 열거나, 아래에 지점 이름을 직접 적어주세요.'
+  }[LINK_STATE];
+  if(drLinkMsg){ $('linkNote').textContent = drLinkMsg; $('linkNote').hidden = false; }
   drawStat(); drawBrand(); drawBranch(); drawOpts(); drawUrg();
+  let drRestored = false; try{ drRestored = drDraftLoad(); }catch(e){ console.warn(e); }
+  if(drRestored) $('draftNote').hidden = false;
+  drDraftReady = true;
 });
 
 </script>
