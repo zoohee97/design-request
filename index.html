@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#024F5B">
+<title>디자인 요청서</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{--ink:#0e3b43;--muted:#76979b;--hair:#e0eeee;--soft:#f0f9f9;--frame:#024F5B;--accent:#A0E5E5;--deep:#1CB6BB;--bg:#e2f4f4;--sel:#e8f8f8}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;font-size:15px;letter-spacing:-.02em}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:640px;margin:0 auto;padding:16px 14px 120px}
+.head{background:var(--frame);color:#fff;border-radius:22px;padding:22px 20px}
+.head h1{margin:0;font-size:22px;letter-spacing:-.03em}
+.head p{margin:6px 0 0;font-size:13px;color:#bfe9e9;line-height:1.6}
+.head .meta{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.head .meta span{background:rgba(255,255,255,.12);border-radius:999px;padding:4px 10px;font-size:12px}
+.ds{display:none;margin-top:14px;background:#fff;border-radius:16px;padding:12px 14px;color:var(--ink)}
+.ds-r{display:flex;align-items:center;gap:10px}
+.ds-w{display:flex;align-items:center;gap:14px}
+.ds-img{width:84px;height:84px;flex:none;border-radius:14px;background:#fffdf5;display:grid;place-items:center;overflow:hidden}
+.ds-img img{max-width:100%;max-height:100%;object-fit:contain}
+.ds-c{flex:1;min-width:0}
+.ds-l{font-size:12px;color:var(--muted)}
+.ds b{font-size:13px;font-weight:700;border-radius:999px;padding:5px 12px;display:inline-flex;align-items:center;gap:6px}
+.ds b::before{content:'';width:8px;height:8px;border-radius:50%;background:currentColor}
+.ds .m{font-size:12.5px;margin-top:6px;line-height:1.5}
+.ds .sc{display:flex;gap:4px;margin-left:auto}
+.ds .sc i{width:22px;height:6px;border-radius:3px;background:#e3eded}
+.st-free{background:#dcf2ec;color:#1f8a6c}.st-busy{background:#fdf0d8;color:#a8690f}.st-crazy{background:#fde2e4;color:#c8364a}
+.card{background:#fff;border-radius:20px;padding:18px 16px;margin-top:12px}
+.card h2{margin:0 0 14px;font-size:16px;display:flex;align-items:center;gap:8px}
+.card h2 .n{width:22px;height:22px;border-radius:50%;background:var(--accent);color:var(--frame);font-size:12px;display:grid;place-items:center}
+.f{margin-bottom:16px}
+.f:last-child{margin-bottom:0}
+label.l,.l{display:block;font-size:12.5px;color:var(--muted);margin-bottom:6px}
+.req{color:#e0607a;margin-left:2px}
+input[type=text],input[type=tel],input[type=date],select,textarea{width:100%;border:1px solid transparent;border-radius:12px;padding:11px 12px;background:var(--soft);font-size:16px}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--deep);background:#fff}
+textarea{min-height:110px;resize:vertical;line-height:1.6}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+.two>*{min-width:0}
+input[type=date]{min-width:0;display:block;-webkit-appearance:none;appearance:none;padding:11px 10px;font-size:15px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{border:0;background:var(--soft);border-radius:999px;padding:9px 14px;font-size:14px;color:#4d6c70}
+.seg button.on{background:var(--frame);color:#fff;font-weight:700}
+.hint{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.6}
+.addr{background:var(--sel);border-radius:12px;padding:10px 12px;font-size:13px;line-height:1.6;margin-top:8px}
+
+/* 항목별 옵션 */
+.opt{background:var(--soft);border-radius:16px;padding:12px 14px;margin-top:8px}
+.opt-h{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.opt-h b{font-size:14px}
+.stp{display:inline-flex;align-items:center;gap:6px;margin-left:auto;background:#fff;border-radius:999px;padding:3px}
+.stp button{width:30px;height:30px;border-radius:50%;border:0;background:var(--soft);font-size:16px}
+.stp span{min-width:44px;text-align:center;font-size:13px;font-weight:700}
+.opt .seg button{background:#fff;padding:8px 13px}
+.opt .seg button.on{background:var(--frame)}
+.opt textarea{min-height:70px;background:#fff;margin-top:8px}
+.tip{font-size:12px;color:#0b7e86;background:#fff;border-radius:10px;padding:7px 10px;margin-top:8px;line-height:1.5}
+
+/* 일정 선택 */
+.evs{display:grid;gap:6px}
+.evc{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:1.5px solid transparent;background:var(--soft);border-radius:14px;padding:10px 12px}
+.evc.on{border-color:var(--deep);background:var(--sel)}
+.evc .tg{font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;background:#fff;color:#0b7e86;flex:none}
+.evc .tt{font-size:14px;font-weight:500}
+.evc .dd{font-size:12px;color:var(--muted)}
+.evc .ck{margin-left:auto;width:20px;height:20px;border-radius:50%;border:2px solid #b6dcdc;flex:none}
+.evc.on .ck{border-color:var(--deep);background:var(--deep);box-shadow:inset 0 0 0 3px #fff}
+.evc.always{background:#fff;border:1.5px dashed #b6dcdc}
+.evc.always.on{border-style:solid;border-color:var(--deep);background:var(--sel)}
+
+/* 급한 정도 */
+.urg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.urg button{border:1.5px solid transparent;background:var(--soft);border-radius:14px;padding:10px 6px;text-align:center}
+.urg button b{display:block;font-size:14px}
+.urg button small{display:block;font-size:11px;color:var(--muted);margin-top:2px}
+.urg button.on{background:var(--frame);color:#fff}
+.urg button.on small{color:#bfe9e9}
+.urg button:disabled{opacity:.35;cursor:not-allowed}
+
+.drop{display:block;border:1.5px dashed #b6dcdc;border-radius:14px;padding:18px;text-align:center;color:var(--deep);font-weight:700;cursor:pointer}
+.drop input{display:none}
+.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.thumbs div{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:1;background:var(--soft)}
+.thumbs img{width:100%;height:100%;object-fit:cover}
+.thumbs button{position:absolute;top:4px;right:4px;width:24px;height:24px;border-radius:50%;border:0;background:rgba(0,0,0,.55);color:#fff;font-size:14px;line-height:1}
+.bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--hair);padding:10px 14px calc(10px + env(safe-area-inset-bottom));display:flex;gap:8px;justify-content:center}
+.bar button{flex:1;max-width:306px;border:0;border-radius:999px;padding:13px;font-weight:700;font-size:15px}
+.b1{background:var(--accent);color:var(--frame)}
+.b2{background:var(--frame);color:#fff}
+.err{color:#d0443a;font-size:12.5px;margin-top:10px;display:none}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--frame);color:#fff;padding:10px 16px;border-radius:999px;font-size:13px;display:none;z-index:5}
+
+#print{display:none}
+@media print{
+  @page{size:A4;margin:14mm}
+  body{background:#fff}
+  .wrap,.bar,.toast{display:none !important}
+  #print{display:block;font-size:11.5pt;color:#111}
+  #print h1{font-size:18pt;margin:0 0 4pt;color:#024F5B}
+  #print .pm{font-size:9.5pt;color:#555;margin-bottom:10pt}
+  #print table{width:100%;border-collapse:collapse;margin-bottom:10pt}
+  #print th,#print td{border:1px solid #bcd;padding:5pt 7pt;text-align:left;vertical-align:top}
+  #print th{width:26%;background:#eef8f8;font-weight:700}
+  #print .imgs{display:grid;grid-template-columns:1fr 1fr;gap:8pt}
+  #print .imgs img{width:100%;max-height:85mm;object-fit:contain;border:1px solid #ddd}
+  #print pre{white-space:pre-wrap;font-family:inherit;margin:0}
+  #print .raw{margin-top:10pt;font-size:8.5pt;color:#444;border:1px dashed #bbb;padding:6pt}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <h1>디자인 요청서</h1>
+    <p>필요한 디자인을 적어 보내주세요. 작성 후 아래 버튼으로 PDF를 저장하거나 내용을 복사해서 디자인 담당자에게 카톡으로 보내면 돼요.</p>
+    <div class="meta"><span id="reqNo"></span><span id="reqDate"></span></div>
+    <div class="ds" id="ds"></div>
+  </div>
+
+  <section class="card">
+    <h2><span class="n">1</span>요청자</h2>
+    <div class="two">
+      <div class="f"><label class="l">이름<span class="req">*</span></label><input type="text" id="who" placeholder="홍길동"></div>
+      <div class="f"><label class="l">소속 · 직책</label><input type="text" id="role" placeholder="평촌점 매니저"></div>
+    </div>
+    <div class="f"><label class="l">연락처</label><input type="tel" id="phone" placeholder="010-0000-0000" inputmode="tel"></div>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">2</span>브랜드 · 지점</h2>
+    <div class="f"><span class="l">브랜드<span class="req">*</span></span><div class="seg" id="brandSeg"></div>
+      <input type="text" id="brandEtc" placeholder="브랜드 이름" style="margin-top:8px;display:none"></div>
+    <div class="f"><label class="l" for="branch">지점<span class="req">*</span></label><select id="branch"></select>
+      <input type="text" id="branchEtc" placeholder="지점 이름 (예: 신세계 대전점 팝업)" style="margin-top:8px;display:none">
+      <div class="addr" id="addr"></div></div>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">3</span>어떤 일정에 쓰나요</h2>
+    <div class="f"><span class="l">일정 선택<span class="req">*</span></span>
+      <div class="evs" id="evs"></div>
+      <input type="text" id="evEtc" placeholder="일정 이름 (예: 12월 신세계 대전 팝업)" style="margin-top:8px;display:none"></div>
+    <div class="two" id="evDates">
+      <div class="f"><label class="l" for="evStart">행사 · 사용 시작일</label><input type="date" id="evStart"></div>
+      <div class="f"><label class="l" for="evEnd">종료일</label><input type="date" id="evEnd"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">4</span>무엇이 필요한가요</h2>
+    <div class="f"><span class="l">요청 항목 (여러 개 선택)<span class="req">*</span></span><div class="seg" id="itemSeg"></div>
+      <input type="text" id="itemEtc" placeholder="기타 항목" style="margin-top:8px;display:none"></div>
+    <div id="opts"></div>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">5</span>언제까지 필요한가요</h2>
+    <div class="f"><label class="l" for="due">받아야 하는 날<span class="req">*</span></label><input type="date" id="due">
+      <div class="hint" id="dueHint">박스 · 컵 같은 인쇄물은 제작에 2~3주 이상 걸려요. 여유 있게 적어주세요.</div></div>
+    <div class="f"><span class="l">급한 정도 <span style="font-size:11px">· 받아야 하는 날 기준으로 자동 선택돼요</span></span><div class="urg" id="urg"></div></div>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">6</span>상세 내용</h2>
+    <div class="f"><label class="l" for="detail">들어갈 문구 · 메뉴명 · 가격 · 원하는 느낌<span class="req">*</span></label>
+      <textarea id="detail" placeholder="예) 겨울 시즌 핫초콜릿 출시 POP, 가격 5,500원&#10;메인 문구: '따뜻한 겨울 한 잔'&#10;브랜드 컬러 유지, 눈 내리는 느낌"></textarea></div>
+    <div class="f"><span class="l">레퍼런스 이미지 · 현장 사진 (최대 6장)</span>
+      <label class="drop">＋ 사진 추가<input type="file" id="imgs" accept="image/*" multiple></label>
+      <div class="thumbs" id="thumbs"></div>
+      <div class="hint">매대 · 벽면 등 부착할 곳 사진이 있으면 정확한 작업에 도움돼요.</div></div>
+    <div class="f"><label class="l" for="memo">기타 메모</label><input type="text" id="memo" placeholder="검품 시간, 설치 담당자 등"></div>
+  </section>
+  <div class="err" id="err"></div>
+</div>
+
+<div class="bar">
+  <button class="b1" id="copyBtn">카톡용 텍스트 복사</button>
+  <button class="b2" id="pdfBtn">PDF로 저장</button>
+</div>
+<div class="toast" id="toast"></div>
+<div id="print"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pad = n => String(n).padStart(2,'0');
+const ymd = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const md = s => { const [,m,d]=s.split('-'); return `${+m}/${+d}`; };
+const now = new Date(), TODAY = ymd(now);
+
+/* 지점 · 일정 · 디자이너 상태
+   1) 스케줄러 앱의 「요청서 링크 만들기」로 만든 링크(#d=...)에 담겨 와요 — 웹페이지 자체엔 연락처가 없어요
+   2) 노트북 앱 안에서 열면 앱 데이터를 바로 읽어요 */
+const CATNAME = {popup:'팝업', store:'입점', menu:'신메뉴'};
+let BRANCHES = {}, EVENTS = [], STAT = null, BASE = '';
+async function readLink(){
+  const m = location.hash.match(/[#&]d=([zj])([A-Za-z0-9_-]+)/); if(!m) return null;
+  const bin = atob(m[2].replace(/-/g,'+').replace(/_/g,'/')), u8 = Uint8Array.from(bin, c => c.charCodeAt(0));
+  let txt;
+  if(m[1]==='z') txt = await new Response(new Blob([u8]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).text();
+  else txt = new TextDecoder().decode(u8);
+  return JSON.parse(txt);
+}
+async function loadData(){
+  let L = null; try{ L = await readLink(); }catch(e){ console.warn(e); }
+  if(L){
+    BRANCHES = L.b || {}; BASE = L.t || '';
+    EVENTS = (L.e||[]).map(([id,cat,brand,bn,title,start,end]) => ({id,cat,brand,bn,title,start,end}));
+    if(L.s) STAT = {st:L.s[0], msg:L.s[1]};
+    return;
+  }
+  let APP = null; try{ APP = JSON.parse(localStorage.getItem('scheduler-v2')); }catch(e){}
+  if(APP){
+    (APP.branches||[]).forEach(b => { (BRANCHES[b.brand] = BRANCHES[b.brand] || []).push([b.name, [b.address,b.addr2].filter(Boolean).join(' '), b.recipient||'', b.phone||'']); });
+    const bmap = Object.fromEntries((APP.branches||[]).map(b=>[b.id,b.name]));
+    EVENTS = (APP.events||[]).filter(e => !e.done && CATNAME[e.cat] && e.end>=TODAY).map(e => ({...e, bn: bmap[e.branchId]||''}));
+    BASE = TODAY;
+  }
+  try{ STAT = JSON.parse(localStorage.getItem('scheduler-status')); }catch(e){}
+}
+function eventsFor(brand, branchName){
+  return EVENTS.filter(e => e.brand===brand && e.end>=TODAY)
+    .sort((a,b) => (b.bn===branchName) - (a.bn===branchName) || a.start.localeCompare(b.start));
+}
+
+const ITEMS = ['포맥스','시트지 · 켈지','쇼핑뉴스 이미지','메뉴 이미지','메뉴판','POP · 가격표','포스터','현수막 · 배너','컵홀더','이중컵','츄러스 박스','칼렌티토스 박스','핫초콜릿 컵','스티커','선물 포장 박스','품목 카드','인테리어 사인','기타'];
+const SIZE_ITEMS = ['메뉴판','POP · 가격표','포스터'];
+const SIZES = ['A4','A3','A2','A1'];
+const STICKERS = {
+  '원형': '지름 30mm 원형 스티커예요.',
+  '도무송': '네모 · 원형 같은 단순한 모양이 아니라, 그림 모양대로 칼선을 따는 자유형 스티커를 뽑을 때 골라주세요.',
+  '기타': ''
+};
+const URG = [['보통','15일 이후',15],['급함','8~14일 이내',8],['매우 급함','7일 이내',0]];
+
+const S = {brand:'츄로츄로', ev:null, items:new Set(), opt:{}, urg:'', imgs:[],
+  no:`DR-${TODAY.replace(/-/g,'')}-${pad(now.getHours())}${pad(now.getMinutes())}`};
+$('reqNo').textContent = S.no; $('reqDate').textContent = '작성일 ' + TODAY;
+
+function seg(el, list, isOn, onPick){
+  el.innerHTML = list.map(v => `<button type="button" class="${isOn(v)?'on':''}" data-v="${esc(v)}">${esc(v)}</button>`).join('');
+  el.querySelectorAll('button').forEach(b => b.onclick = () => { onPick(b.dataset.v); seg(el, list, isOn, onPick); });
+}
+
+/* 브랜드 · 지점 */
+function drawBrand(){ seg($('brandSeg'), [...new Set(['츄로츄로','모락모락 다과점',...Object.keys(BRANCHES)]),'기타'], v => v===S.brand, v => { S.brand=v; S.ev=null; drawBranch(); }); }
+function drawBranch(){
+  $('brandEtc').style.display = S.brand==='기타' ? 'block' : 'none';
+  const list = BRANCHES[S.brand] || [];
+  $('branch').innerHTML = list.map((b,i)=>`<option value="${i}">${esc(b[0])}</option>`).join('') + '<option value="etc">기타 · 새 지점</option>';
+  onBranch();
+}
+function curBranch(){ return (BRANCHES[S.brand]||[])[$('branch').value]; }
+function onBranch(){
+  const b = curBranch();
+  $('branchEtc').style.display = b ? 'none' : 'block';
+  $('addr').innerHTML = b ? `📦 배송지: ${esc(b[1]||'-')}${b[2]||b[3]?`<br>받는 분: ${esc(b[2])} ${esc(b[3])}`:''}` : '새 지점은 배송 주소를 상세 내용이나 메모에 적어주세요.';
+  drawEvents();
+}
+$('branch').onchange = onBranch;
+
+/* 일정 선택 */
+function drawEvents(){
+  const b = curBranch(), list = eventsFor(S.brand, b ? b[0] : '');
+  const card = (key, tag, title, sub, cls='') => `<button type="button" class="evc ${cls} ${S.ev===key?'on':''}" data-ev="${esc(key)}">
+    <span class="tg">${tag}</span><span><div class="tt">${esc(title)}</div><div class="dd">${sub}</div></span><span class="ck"></span></button>`;
+  let h = list.map(e => card(String(e.id), CATNAME[e.cat]||'일정', e.title, `${e.bn?esc(e.bn)+' · ':''}${md(e.start)}${e.end!==e.start?' ~ '+md(e.end):''}`)).join('');
+  if(!list.length) h += `<div class="hint" style="margin:0 0 4px">달력에 등록된 ${esc(S.brand)} 일정이 없어요. 아래에서 골라주세요.</div>`;
+  h += card('always','상시','상시 운영 인쇄물','특정 행사 없이 매장 운영에 계속 필요한 것 (재발주 등)','always');
+  h += card('etc','기타','목록에 없는 일정','새 행사 · 아직 등록 안 된 일정','always');
+  $('evs').innerHTML = h;
+  $('evs').querySelectorAll('[data-ev]').forEach(x => x.onclick = () => {
+    S.ev = x.dataset.ev;
+    const e = list.find(e => String(e.id)===S.ev);
+    if(e){ $('evStart').value=e.start; $('evEnd').value=e.end; }
+    drawEvents();
+  });
+  $('evEtc').style.display = S.ev==='etc' ? 'block' : 'none';
+  $('evDates').style.display = S.ev==='always' ? 'none' : 'grid';
+}
+
+/* 요청 항목 + 항목별 옵션 */
+seg($('itemSeg'), ITEMS, v => S.items.has(v), v => {
+  if(S.items.has(v)) S.items.delete(v); else { S.items.add(v); S.opt[v] = S.opt[v] || {size:'A4', qty:1, kind:'원형', desc:''}; }
+  $('itemEtc').style.display = S.items.has('기타') ? 'block' : 'none';
+  drawOpts();
+});
+function drawOpts(){
+  const list = [...S.items].filter(v => SIZE_ITEMS.includes(v) || v==='스티커');
+  $('opts').innerHTML = list.map(v => { const o=S.opt[v];
+    const stp = `<span class="stp"><button type="button" data-q="${esc(v)}" data-d="-1" aria-label="수량 줄이기">−</button><span>${o.qty}${v==='스티커'?'종':'장'}</span><button type="button" data-q="${esc(v)}" data-d="1" aria-label="수량 늘리기">+</button></span>`;
+    if(v==='스티커') return `<div class="opt"><div class="opt-h"><b>스티커 종류</b>${stp}</div>
+      <div class="seg" data-kind="${esc(v)}">${Object.keys(STICKERS).map(k=>`<button type="button" class="${k===o.kind?'on':''}" data-v="${k}">${k}</button>`).join('')}</div>
+      ${o.kind==='기타' ? `<textarea data-desc="${esc(v)}" placeholder="기존에 없던 스티커라면 어떤 모양 · 용도인지 짧게 적어주세요">${esc(o.desc)}</textarea>` : `<div class="tip">${STICKERS[o.kind]}</div>`}</div>`;
+    return `<div class="opt"><div class="opt-h"><b>${esc(v)} 사이즈</b>${stp}</div>
+      <div class="seg" data-size="${esc(v)}">${SIZES.map(s=>`<button type="button" class="${s===o.size?'on':''}" data-v="${s}">${s}</button>`).join('')}</div>
+      ${v==='POP · 가격표' ? '<div class="tip">POP꽂이에 꽂을 거라면 A3를 골라주세요.</div>' : ''}</div>`;
+  }).join('');
+  $('opts').querySelectorAll('[data-q]').forEach(b => b.onclick = () => { const o=S.opt[b.dataset.q]; o.qty=Math.max(1,o.qty+Number(b.dataset.d)); drawOpts(); });
+  $('opts').querySelectorAll('[data-size] button').forEach(b => b.onclick = () => { S.opt[b.parentNode.dataset.size].size=b.dataset.v; drawOpts(); });
+  $('opts').querySelectorAll('[data-kind] button').forEach(b => b.onclick = () => { S.opt[b.parentNode.dataset.kind].kind=b.dataset.v; drawOpts(); });
+  $('opts').querySelectorAll('[data-desc]').forEach(t => t.oninput = () => S.opt[t.dataset.desc].desc=t.value);
+}
+
+/* 급한 정도: 받아야 하는 날 기준 자동 */
+function drawUrg(){
+  const d=$('due').value, left = d ? Math.round((new Date(d)-new Date(TODAY))/864e5) : null;
+  const auto = left==null ? '' : left>=15 ? '보통' : left>=8 ? '급함' : '매우 급함';
+  S.urg = auto;
+  $('urg').innerHTML = URG.map(([k,c]) => `<button type="button" class="${k===auto?'on':''}" ${left!=null&&k!==auto?'disabled':''}><b>${k}</b><small>${c}</small></button>`).join('');
+  $('dueHint').textContent = left==null ? '박스 · 컵 같은 인쇄물은 제작에 2~3주 이상 걸려요. 여유 있게 적어주세요.'
+    : left<0 ? '⚠️ 지난 날짜예요.' : `${left}일 뒤 · 박스 · 컵류는 제작에 2~3주 이상 걸려요.`;
+}
+$('due').oninput = drawUrg;
+
+/* 사진 */
+function shrink(file){ return new Promise(res => { const r=new FileReader(); r.onload=()=>{ const im=new Image(); im.onload=()=>{
+  const s=Math.min(1,1400/Math.max(im.width,im.height)), c=document.createElement('canvas'); c.width=im.width*s; c.height=im.height*s;
+  c.getContext('2d').drawImage(im,0,0,c.width,c.height); res(c.toDataURL('image/jpeg',.85)); }; im.src=r.result; }; r.readAsDataURL(file); }); }
+$('imgs').onchange = async () => { for(const f of [...$('imgs').files].slice(0, 6-S.imgs.length)) S.imgs.push(await shrink(f)); $('imgs').value=''; drawThumbs(); };
+function drawThumbs(){
+  $('thumbs').innerHTML = S.imgs.map((u,i)=>`<div><img src="${u}" alt="레퍼런스 ${i+1}"><button type="button" data-rm="${i}" aria-label="사진 삭제">×</button></div>`).join('');
+  $('thumbs').querySelectorAll('[data-rm]').forEach(b => b.onclick = () => { S.imgs.splice(+b.dataset.rm,1); drawThumbs(); });
+}
+
+/* 내용 모으기 (스케줄러에 바로 옮길 수 있는 고정 형식) */
+function collect(){
+  const b = curBranch();
+  const list = eventsFor(S.brand, b ? b[0] : ''); const ev = list.find(e => String(e.id)===S.ev);
+  const items = [...S.items].map(v => {
+    const o = S.opt[v];
+    if(v==='기타') return $('itemEtc').value.trim() || '기타';
+    if(SIZE_ITEMS.includes(v)) return `${v} (${o.size} · ${o.qty}장)`;
+    if(v==='스티커') return `스티커 (${o.kind}${o.kind==='원형'?' 30mm':''} · ${o.qty}종${o.kind==='기타'&&o.desc?' · '+o.desc.trim():''})`;
+    return v;
+  });
+  return {
+    no:S.no, date:TODAY, who:$('who').value.trim(), role:$('role').value.trim(), phone:$('phone').value.trim(),
+    brand: S.brand==='기타' ? $('brandEtc').value.trim() : S.brand,
+    branch: b ? b[0] : $('branchEtc').value.trim(), ship: b && b[1] ? `${b[1]}${b[2]||b[3]?` (${[b[2],b[3]].filter(Boolean).join(' ')})`:''}` : '',
+    ev: S.ev==='always' ? '상시 운영' : S.ev==='etc' ? ('기타: ' + ($('evEtc').value.trim()||'-')) : ev ? `[${CATNAME[ev.cat]}] ${ev.title} (#${ev.id})` : '',
+    evStart: S.ev==='always' ? '' : $('evStart').value, evEnd: S.ev==='always' ? '' : $('evEnd').value,
+    items, due:$('due').value, urg:S.urg, detail:$('detail').value.trim(), memo:$('memo').value.trim(), imgs:S.imgs
+  };
+}
+function validate(d){
+  const miss = [];
+  if(!d.who) miss.push('이름'); if(!d.brand) miss.push('브랜드'); if(!d.branch) miss.push('지점');
+  if(!d.ev) miss.push('일정'); if(!d.items.length) miss.push('요청 항목'); if(!d.due) miss.push('받아야 하는 날'); if(!d.detail) miss.push('상세 내용');
+  $('err').style.display = miss.length ? 'block' : 'none';
+  $('err').textContent = miss.length ? '필수 항목을 채워주세요: ' + miss.join(', ') : '';
+  if(miss.length) $('err').scrollIntoView({behavior:'smooth',block:'center'});
+  return !miss.length;
+}
+function toText(d){
+  return [
+    '[디자인 요청서]',
+    `요청번호: ${d.no}`, `작성일: ${d.date}`,
+    `요청자: ${d.who}${d.role?' / '+d.role:''}${d.phone?' / '+d.phone:''}`,
+    `브랜드: ${d.brand}`, `지점: ${d.branch}`, d.ship?`배송지: ${d.ship}`:null,
+    `일정: ${d.ev}`, d.evStart?`행사 기간: ${d.evStart} ~ ${d.evEnd||d.evStart}`:null,
+    `요청 항목:\n` + d.items.map(i=>`- ${i}`).join('\n'),
+    `납품 희망일: ${d.due}`, `급한 정도: ${d.urg}`,
+    `상세 내용:\n${d.detail}`, d.memo?`메모: ${d.memo}`:null,
+    `레퍼런스 이미지: ${d.imgs.length}장${d.imgs.length?' (PDF에 첨부)':''}`
+  ].filter(Boolean).join('\n');
+}
+function toast(m){ const t=$('toast'); t.textContent=m; t.style.display='block'; clearTimeout(t._h); t._h=setTimeout(()=>t.style.display='none',2200); }
+
+$('copyBtn').onclick = async () => {
+  const d=collect(); if(!validate(d)) return;
+  const txt=toText(d);
+  try{ await navigator.clipboard.writeText(txt); toast('복사됐어요. 카톡에 붙여넣어 보내주세요'); }
+  catch(e){ const ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); toast('복사됐어요'); }
+};
+$('pdfBtn').onclick = () => {
+  const d=collect(); if(!validate(d)) return;
+  const row = (k,v) => v ? `<tr><th>${k}</th><td>${v}</td></tr>` : '';
+  $('print').innerHTML = `<h1>디자인 요청서</h1><div class="pm">${d.no} · 작성일 ${d.date}</div>
+    <table>
+      ${row('요청자', esc([d.who,d.role,d.phone].filter(Boolean).join(' / ')))}
+      ${row('브랜드 · 지점', esc(d.brand+' · '+d.branch))}
+      ${row('배송지', esc(d.ship))}
+      ${row('일정', esc(d.ev))}
+      ${row('행사 기간', d.evStart ? esc(`${d.evStart} ~ ${d.evEnd||d.evStart}`) : '')}
+      ${row('요청 항목', d.items.map(esc).join('<br>'))}
+      ${row('납품 희망일', esc(d.due))}
+      ${row('급한 정도', esc(d.urg))}
+      ${row('상세 내용', `<pre>${esc(d.detail)}</pre>`)}
+      ${row('메모', esc(d.memo))}
+    </table>
+    ${d.imgs.length?`<div class="imgs">${d.imgs.map(u=>`<img src="${u}" alt="">`).join('')}</div>`:''}
+    <div class="raw"><pre>${esc(toText(d))}</pre></div>`;
+  const prevTitle=document.title; document.title=`디자인요청서_${d.brand}_${d.branch}_${d.date}`;
+  setTimeout(()=>{ window.print(); document.title=prevTitle; }, 300);
+};
+
+/* 디자이너 상태 (스케줄러 앱이 계산해 둔 값) */
+function drawStat(){
+  const s = STAT;
+  if(!s || !s.st) return;
+  const cls = {'한가함':'st-free','바쁨':'st-busy','개바쁨':'st-crazy'}[s.st], lv = {'한가함':1,'바쁨':2,'개바쁨':3}[s.st];
+  const col = {'한가함':'#1f8a6c','바쁨':'#e0a23b','개바쁨':'#d9475b'}[s.st];
+  const img = {'한가함':'assets/status-free.png','바쁨':'assets/status-busy.png','개바쁨':'assets/status-crazy.png'}[s.st];
+  $('ds').innerHTML = `<div class="ds-w"><div class="ds-img"><img src="${img}" alt="디자이너 ${s.st}" onerror="this.parentNode.remove()"></div><div class="ds-c"><div class="ds-r"><span class="ds-l">지금 디자이너는</span><b class="${cls}">${esc(s.st)}</b>
+    <span class="sc">${[1,2,3].map(i=>`<i style="${i<=lv?'background:'+col:''}"></i>`).join('')}</span></div><div class="m">${esc(s.msg||'')}</div></div></div>`;
+  $('ds').style.display='block';
+}
+
+loadData().then(() => {
+  if(BASE && BASE!==TODAY) $('reqDate').textContent += ` · 일정은 ${md(BASE)} 기준`;
+  drawStat(); drawBrand(); drawBranch(); drawOpts(); drawUrg();
+});
+
+</script>
+</body>
+</html>
